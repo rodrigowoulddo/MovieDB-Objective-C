@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7505FE4624214AA300BACD28 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 7505FE4524214AA300BACD28 /* SceneDelegate.m */; };
+		7505FE6E242150DC00BACD28 /* Movie.m in Sources */ = {isa = PBXBuildFile; fileRef = 7505FE6D242150DC00BACD28 /* Movie.m */; };
 		750740C92420202A009B0CDC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 750740C82420202A009B0CDC /* AppDelegate.m */; };
-		750740CC2420202A009B0CDC /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 750740CB2420202A009B0CDC /* SceneDelegate.m */; };
 		750740CF2420202A009B0CDC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 750740CE2420202A009B0CDC /* ViewController.m */; };
 		750740D22420202A009B0CDC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 750740D02420202A009B0CDC /* Main.storyboard */; };
 		750740D52420202A009B0CDC /* ObjectiveCProject.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 750740D32420202A009B0CDC /* ObjectiveCProject.xcdatamodeld */; };
@@ -17,6 +18,7 @@
 		750740DD2420202C009B0CDC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 750740DC2420202C009B0CDC /* main.m */; };
 		750740E72420202D009B0CDC /* ObjectiveCProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 750740E62420202D009B0CDC /* ObjectiveCProjectTests.m */; };
 		750740F22420202D009B0CDC /* ObjectiveCProjectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 750740F12420202D009B0CDC /* ObjectiveCProjectUITests.m */; };
+		7507410024202923009B0CDC /* MovieDBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 750740FF24202923009B0CDC /* MovieDBRequest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,11 +39,13 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7505FE4424214AA300BACD28 /* SceneDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		7505FE4524214AA300BACD28 /* SceneDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		7505FE6C242150DC00BACD28 /* Movie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
+		7505FE6D242150DC00BACD28 /* Movie.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
 		750740C42420202A009B0CDC /* ObjectiveCProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObjectiveCProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		750740C72420202A009B0CDC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		750740C82420202A009B0CDC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		750740CA2420202A009B0CDC /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
-		750740CB2420202A009B0CDC /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		750740CD2420202A009B0CDC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		750740CE2420202A009B0CDC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		750740D12420202A009B0CDC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -56,6 +60,8 @@
 		750740ED2420202D009B0CDC /* ObjectiveCProjectUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ObjectiveCProjectUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		750740F12420202D009B0CDC /* ObjectiveCProjectUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ObjectiveCProjectUITests.m; sourceTree = "<group>"; };
 		750740F32420202D009B0CDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		750740FF24202923009B0CDC /* MovieDBRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieDBRequest.m; sourceTree = "<group>"; };
+		7507410124202934009B0CDC /* MovieDBRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieDBRequest.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,6 +89,54 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7505FE6F242150E500BACD28 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				7505FE6C242150DC00BACD28 /* Movie.h */,
+				7505FE6D242150DC00BACD28 /* Movie.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		7505FE70242150F700BACD28 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				750740CD2420202A009B0CDC /* ViewController.h */,
+				750740CE2420202A009B0CDC /* ViewController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		7505FE712421510C00BACD28 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				7505FE4424214AA300BACD28 /* SceneDelegate.h */,
+				7505FE4524214AA300BACD28 /* SceneDelegate.m */,
+				750740C72420202A009B0CDC /* AppDelegate.h */,
+				750740C82420202A009B0CDC /* AppDelegate.m */,
+				750740DC2420202C009B0CDC /* main.m */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		7505FE722421512100BACD28 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				750740D82420202C009B0CDC /* LaunchScreen.storyboard */,
+				750740D02420202A009B0CDC /* Main.storyboard */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		7505FE732421513100BACD28 /* Networking */ = {
+			isa = PBXGroup;
+			children = (
+				7507410124202934009B0CDC /* MovieDBRequest.h */,
+				750740FF24202923009B0CDC /* MovieDBRequest.m */,
+			);
+			path = Networking;
+			sourceTree = "<group>";
+		};
 		750740BB2420202A009B0CDC = {
 			isa = PBXGroup;
 			children = (
@@ -106,17 +160,13 @@
 		750740C62420202A009B0CDC /* ObjectiveCProject */ = {
 			isa = PBXGroup;
 			children = (
-				750740C72420202A009B0CDC /* AppDelegate.h */,
-				750740C82420202A009B0CDC /* AppDelegate.m */,
-				750740CA2420202A009B0CDC /* SceneDelegate.h */,
-				750740CB2420202A009B0CDC /* SceneDelegate.m */,
-				750740CD2420202A009B0CDC /* ViewController.h */,
-				750740CE2420202A009B0CDC /* ViewController.m */,
-				750740D02420202A009B0CDC /* Main.storyboard */,
-				750740D62420202C009B0CDC /* Assets.xcassets */,
-				750740D82420202C009B0CDC /* LaunchScreen.storyboard */,
+				7505FE712421510C00BACD28 /* App */,
+				7505FE6F242150E500BACD28 /* Models */,
+				7505FE722421512100BACD28 /* Views */,
+				7505FE70242150F700BACD28 /* Controllers */,
+				7505FE732421513100BACD28 /* Networking */,
 				750740DB2420202C009B0CDC /* Info.plist */,
-				750740DC2420202C009B0CDC /* main.m */,
+				750740D62420202C009B0CDC /* Assets.xcassets */,
 				750740D32420202A009B0CDC /* ObjectiveCProject.xcdatamodeld */,
 			);
 			path = ObjectiveCProject;
@@ -272,8 +322,10 @@
 			files = (
 				750740DD2420202C009B0CDC /* main.m in Sources */,
 				750740CF2420202A009B0CDC /* ViewController.m in Sources */,
+				7505FE6E242150DC00BACD28 /* Movie.m in Sources */,
+				7505FE4624214AA300BACD28 /* SceneDelegate.m in Sources */,
 				750740C92420202A009B0CDC /* AppDelegate.m in Sources */,
-				750740CC2420202A009B0CDC /* SceneDelegate.m in Sources */,
+				7507410024202923009B0CDC /* MovieDBRequest.m in Sources */,
 				750740D52420202A009B0CDC /* ObjectiveCProject.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
