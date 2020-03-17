@@ -43,7 +43,7 @@
 		7505FE4524214AA300BACD28 /* SceneDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		7505FE6C242150DC00BACD28 /* Movie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
 		7505FE6D242150DC00BACD28 /* Movie.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
-		750740C42420202A009B0CDC /* ObjectiveCProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ObjectiveCProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		750740C42420202A009B0CDC /* Films.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Films.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		750740C72420202A009B0CDC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		750740C82420202A009B0CDC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		750740CD2420202A009B0CDC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -150,7 +150,7 @@
 		750740C52420202A009B0CDC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				750740C42420202A009B0CDC /* ObjectiveCProject.app */,
+				750740C42420202A009B0CDC /* Films.app */,
 				750740E22420202D009B0CDC /* ObjectiveCProjectTests.xctest */,
 				750740ED2420202D009B0CDC /* ObjectiveCProjectUITests.xctest */,
 			);
@@ -207,7 +207,7 @@
 			);
 			name = ObjectiveCProject;
 			productName = ObjectiveCProject;
-			productReference = 750740C42420202A009B0CDC /* ObjectiveCProject.app */;
+			productReference = 750740C42420202A009B0CDC /* Films.app */;
 			productType = "com.apple.product-type.application";
 		};
 		750740E12420202D009B0CDC /* ObjectiveCProjectTests */ = {
@@ -503,7 +503,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rodrigowoulddo.ObjectiveCProject;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Films;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -520,7 +520,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rodrigowoulddo.ObjectiveCProject;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = Films;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
