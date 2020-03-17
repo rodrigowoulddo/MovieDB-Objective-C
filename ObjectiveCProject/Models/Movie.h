@@ -10,10 +10,11 @@
 
 @interface Movie : NSObject
 
-@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *title;
 @property (strong, nonatomic) NSString *overview;
 @property (strong, nonatomic) NSNumber *rating;
 @property (strong, nonatomic) NSString *imageUrl;
 
+-(id) initWithDictionary:(NSDictionary *) dictionary;
 
 @end
