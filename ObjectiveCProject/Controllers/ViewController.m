@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 #import "Movie.h"
+#import "MovieDBRequest.h"
+#import "MovieTableViewCell.h"
 
 @interface ViewController ()
 
@@ -18,12 +20,6 @@
 
 @implementation ViewController
 
-
-//MARK: - Constants
-NSString *cellId = @"cell";
-NSString *moviesUrl = @"https://api.themoviedb.org/3/trending/movie/week?api_key=2e8128cacbf1cbae9230177e3e5bc171";
-
-
 // MARK: - Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,64 +29,38 @@ NSString *moviesUrl = @"https://api.themoviedb.org/3/trending/movie/week?api_key
     self.title = @"Movies";
     self.navigationController.navigationBar.prefersLargeTitles = YES;
     
-    [self.tableView registerClass:UITableViewCell.class forCellReuseIdentifier: cellId];
+//    [self.tableView registerClass:MovieTableViewCell.class forCellReuseIdentifier: [MovieTableViewCell identifier]];
 }
 
 -(void) fechMovies {
-    NSLog(@"Fetching movies...");
-    
-    NSURL *url = [NSURL URLWithString:moviesUrl];
-    
-    [[NSURLSession.sharedSession dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+
+    [MovieDBRequest getTrendingMoviesWithCompletionHandler:^(NSMutableArray *movies) {
         
-        NSLog(@"Finished fetching Movies.");
-        
-        /// Uncomment these lines to se
-        /// the returned movies list printed
-        /// on console
-        /*
-        NSString *jsonResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        NSLog(@"Response: %@", jsonResponse);
-        */
-        
-        NSError *err;
-        NSDictionary *resultJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&err];
-        
-        if (err) {
-            NSLog(@"Failed to serialize data into JSON: %@", err);
-            return;
-        }
-        
-        self.movies = NSMutableArray.new;
-        
-        NSArray *moviesArray = resultJSON[@"results"];
-        for (NSDictionary *movieDictionary in moviesArray) {
-            Movie *movie = Movie.new;
-            movie = [movie initWithDictionary:movieDictionary];
-            
-            [self.movies addObject:movie];
-        }
-        
-        NSLog(@"Did fetch json to object array");
-        
+        self.movies = movies;
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.tableView reloadData];
         });
         
-    }] resume];
+    }];
 }
+
+
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.movies.count;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 148;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: cellId forIndexPath:indexPath];
+    MovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: [MovieTableViewCell identifier] forIndexPath:indexPath];
     
     Movie *movie = self.movies[indexPath.row];
     
-    cell.textLabel.text = movie.title;
+    [cell configureWithMovie:movie];
     
     return cell;
     

@@ -19,6 +19,7 @@
 		750740E72420202D009B0CDC /* ObjectiveCProjectTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 750740E62420202D009B0CDC /* ObjectiveCProjectTests.m */; };
 		750740F22420202D009B0CDC /* ObjectiveCProjectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 750740F12420202D009B0CDC /* ObjectiveCProjectUITests.m */; };
 		7507410024202923009B0CDC /* MovieDBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 750740FF24202923009B0CDC /* MovieDBRequest.m */; };
+		752E3C2A2422A4B600098643 /* MovieTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 752E3C292422A4B600098643 /* MovieTableViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -43,7 +44,7 @@
 		7505FE4524214AA300BACD28 /* SceneDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		7505FE6C242150DC00BACD28 /* Movie.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Movie.h; sourceTree = "<group>"; };
 		7505FE6D242150DC00BACD28 /* Movie.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Movie.m; sourceTree = "<group>"; };
-		750740C42420202A009B0CDC /* Films.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Films.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		750740C42420202A009B0CDC /* Movies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Movies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		750740C72420202A009B0CDC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		750740C82420202A009B0CDC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		750740CD2420202A009B0CDC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
@@ -62,6 +63,8 @@
 		750740F32420202D009B0CDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		750740FF24202923009B0CDC /* MovieDBRequest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieDBRequest.m; sourceTree = "<group>"; };
 		7507410124202934009B0CDC /* MovieDBRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieDBRequest.h; sourceTree = "<group>"; };
+		752E3C282422A4B600098643 /* MovieTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieTableViewCell.h; sourceTree = "<group>"; };
+		752E3C292422A4B600098643 /* MovieTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieTableViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +106,8 @@
 			children = (
 				750740CD2420202A009B0CDC /* ViewController.h */,
 				750740CE2420202A009B0CDC /* ViewController.m */,
+				752E3C282422A4B600098643 /* MovieTableViewCell.h */,
+				752E3C292422A4B600098643 /* MovieTableViewCell.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -150,7 +155,7 @@
 		750740C52420202A009B0CDC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				750740C42420202A009B0CDC /* Films.app */,
+				750740C42420202A009B0CDC /* Movies.app */,
 				750740E22420202D009B0CDC /* ObjectiveCProjectTests.xctest */,
 				750740ED2420202D009B0CDC /* ObjectiveCProjectUITests.xctest */,
 			);
@@ -207,7 +212,7 @@
 			);
 			name = ObjectiveCProject;
 			productName = ObjectiveCProject;
-			productReference = 750740C42420202A009B0CDC /* Films.app */;
+			productReference = 750740C42420202A009B0CDC /* Movies.app */;
 			productType = "com.apple.product-type.application";
 		};
 		750740E12420202D009B0CDC /* ObjectiveCProjectTests */ = {
@@ -322,6 +327,7 @@
 			files = (
 				750740DD2420202C009B0CDC /* main.m in Sources */,
 				750740CF2420202A009B0CDC /* ViewController.m in Sources */,
+				752E3C2A2422A4B600098643 /* MovieTableViewCell.m in Sources */,
 				7505FE6E242150DC00BACD28 /* Movie.m in Sources */,
 				7505FE4624214AA300BACD28 /* SceneDelegate.m in Sources */,
 				750740C92420202A009B0CDC /* AppDelegate.m in Sources */,
@@ -503,7 +509,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rodrigowoulddo.ObjectiveCProject;
-				PRODUCT_NAME = Films;
+				PRODUCT_NAME = Movies;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -520,7 +526,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.rodrigowoulddo.ObjectiveCProject;
-				PRODUCT_NAME = Films;
+				PRODUCT_NAME = Movies;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

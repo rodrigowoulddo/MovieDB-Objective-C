@@ -15,6 +15,6 @@
 
 @interface MovieDBRequest: NSObject
 
-//-(NSSet)getTrending;
++ (void) getTrendingMoviesWithCompletionHandler:(void(^)(NSMutableArray *))handler;
 
 @end
