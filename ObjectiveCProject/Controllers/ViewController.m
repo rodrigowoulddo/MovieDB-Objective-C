@@ -10,11 +10,13 @@
 #import "Movie.h"
 #import "MovieDBRequest.h"
 #import "MovieTableViewCell.h"
+#import "MovieDetailViewController.h"
 
 @interface ViewController ()
 
 //MARK: - Variables
 @property (strong, nonatomic) NSMutableArray<Movie *> *movies;
+@property (strong, nonatomic) Movie *selectedMovie;
 
 @end
 
@@ -28,8 +30,6 @@
     
     self.title = @"Movies";
     self.navigationController.navigationBar.prefersLargeTitles = YES;
-    
-//    [self.tableView registerClass:MovieTableViewCell.class forCellReuseIdentifier: [MovieTableViewCell identifier]];
 }
 
 -(void) fechMovies {
@@ -64,6 +64,22 @@
     
     return cell;
     
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    Movie *selectedMovie = self.movies[indexPath.row];
+    self.selectedMovie = selectedMovie;
+    
+    [self performSegueWithIdentifier:@"detail" sender:nil];
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    MovieDetailViewController *movieDetailVC = [segue destinationViewController];
+    
+    [movieDetailVC configureWithMovie: self.selectedMovie];
 }
 
 @end

@@ -20,6 +20,7 @@
 		750740F22420202D009B0CDC /* ObjectiveCProjectUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 750740F12420202D009B0CDC /* ObjectiveCProjectUITests.m */; };
 		7507410024202923009B0CDC /* MovieDBRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 750740FF24202923009B0CDC /* MovieDBRequest.m */; };
 		752E3C2A2422A4B600098643 /* MovieTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 752E3C292422A4B600098643 /* MovieTableViewCell.m */; };
+		752E3C2D2422B4D900098643 /* MovieDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 752E3C2C2422B4D900098643 /* MovieDetailViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,8 @@
 		7507410124202934009B0CDC /* MovieDBRequest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieDBRequest.h; sourceTree = "<group>"; };
 		752E3C282422A4B600098643 /* MovieTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieTableViewCell.h; sourceTree = "<group>"; };
 		752E3C292422A4B600098643 /* MovieTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieTableViewCell.m; sourceTree = "<group>"; };
+		752E3C2B2422B4D900098643 /* MovieDetailViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MovieDetailViewController.h; sourceTree = "<group>"; };
+		752E3C2C2422B4D900098643 /* MovieDetailViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MovieDetailViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +111,8 @@
 				750740CE2420202A009B0CDC /* ViewController.m */,
 				752E3C282422A4B600098643 /* MovieTableViewCell.h */,
 				752E3C292422A4B600098643 /* MovieTableViewCell.m */,
+				752E3C2B2422B4D900098643 /* MovieDetailViewController.h */,
+				752E3C2C2422B4D900098643 /* MovieDetailViewController.m */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -331,6 +336,7 @@
 				7505FE6E242150DC00BACD28 /* Movie.m in Sources */,
 				7505FE4624214AA300BACD28 /* SceneDelegate.m in Sources */,
 				750740C92420202A009B0CDC /* AppDelegate.m in Sources */,
+				752E3C2D2422B4D900098643 /* MovieDetailViewController.m in Sources */,
 				7507410024202923009B0CDC /* MovieDBRequest.m in Sources */,
 				750740D52420202A009B0CDC /* ObjectiveCProject.xcdatamodeld in Sources */,
 			);
