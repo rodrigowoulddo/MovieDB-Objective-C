@@ -15,12 +15,18 @@
 
 @implementation MovieDetailViewController
 
+
+// MARK: - Lifecycle
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"Movie Detail";
+    
+    [self configureWithMovie:self.movie];
 }
 
-//MARK: - Config
+
+// MARK: - Private Methods
 - (void)configureWithMovie:(Movie *)movie {
     
     /// Sets texts

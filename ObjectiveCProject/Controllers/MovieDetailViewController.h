@@ -19,8 +19,8 @@ NS_ASSUME_NONNULL_BEGIN
 @property (weak, nonatomic) IBOutlet UILabel *movieRatingLabel;
 @property (weak, nonatomic) IBOutlet UITextView *movieOverviewTextView;
 
-// MARK: - Methods
-- (void)configureWithMovie:(Movie *)movie;
+// MARK: Variables
+@property (nonatomic) Movie *movie;
 
 
 @end

@@ -25,7 +25,7 @@
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2mC-pG-HSi">
                                             <rect key="frame" x="15" y="15" width="79" height="118"/>
-                                            <color key="backgroundColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="backgroundColor" systemColor="quaternaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.17999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="118" id="b5d-N1-4bV"/>
                                                 <constraint firstAttribute="width" constant="79" id="ys4-Nn-RQk"/>
@@ -42,15 +42,15 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" relation="lessThanOrEqual" constant="50" id="Fi5-rk-c0r"/>
                                             </constraints>
-                                            <mutableString key="text">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                                            <string key="text">Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
 
-</mutableString>
+</string>
                                             <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                             <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="alM-M5-xoe">
-                                            <rect key="frame" x="104" y="112" width="40" height="15"/>
+                                            <rect key="frame" x="104" y="112" width="270" height="15"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="BQS-qd-G4t">
                                                     <rect key="frame" x="0.0" y="0.0" width="12" height="15"/>
@@ -60,7 +60,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gof-iN-sCQ">
-                                                    <rect key="frame" x="17" y="0.0" width="23" height="15"/>
+                                                    <rect key="frame" x="17" y="0.0" width="253" height="15"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                     <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -69,7 +69,6 @@
                                             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="15" id="52a-sJ-bgB"/>
-                                                <constraint firstAttribute="width" constant="40" id="AWk-eR-oQv"/>
                                                 <constraint firstAttribute="trailing" secondItem="gof-iN-sCQ" secondAttribute="trailing" id="Hyz-IY-tRs"/>
                                                 <constraint firstItem="gof-iN-sCQ" firstAttribute="leading" secondItem="BQS-qd-G4t" secondAttribute="trailing" constant="5" id="R0W-2A-l0l"/>
                                                 <constraint firstItem="gof-iN-sCQ" firstAttribute="top" secondItem="alM-M5-xoe" secondAttribute="top" id="UFL-vT-TLD"/>
@@ -85,6 +84,7 @@
                                         <constraint firstAttribute="trailingMargin" secondItem="UBz-QH-UBo" secondAttribute="trailing" constant="10" id="5h2-YI-Mpk"/>
                                         <constraint firstItem="alM-M5-xoe" firstAttribute="leading" secondItem="2mC-pG-HSi" secondAttribute="trailing" constant="10" id="8mt-yc-gd1"/>
                                         <constraint firstItem="2mC-pG-HSi" firstAttribute="leading" secondItem="s13-9a-viB" secondAttribute="leading" constant="15" id="BU0-OO-Tgj"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="alM-M5-xoe" secondAttribute="trailing" constant="20" id="Gnh-fA-viS"/>
                                         <constraint firstItem="2mC-pG-HSi" firstAttribute="centerY" secondItem="s13-9a-viB" secondAttribute="centerY" id="K4d-bI-rtb"/>
                                         <constraint firstItem="vEc-aF-TrG" firstAttribute="top" secondItem="s13-9a-viB" secondAttribute="topMargin" constant="15" id="KsH-7M-mdY"/>
                                         <constraint firstItem="UBz-QH-UBo" firstAttribute="leading" secondItem="2mC-pG-HSi" secondAttribute="trailing" constant="10" id="QEB-D9-eHi"/>
@@ -140,7 +140,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EKH-Zo-IuI">
-                                <rect key="frame" x="163" y="222" width="40" height="15"/>
+                                <rect key="frame" x="163" y="222" width="231" height="15"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="3TV-Se-vRa">
                                         <rect key="frame" x="0.0" y="0.0" width="12" height="15"/>
@@ -150,7 +150,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="5.5" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a5i-6C-MMs">
-                                        <rect key="frame" x="17" y="0.0" width="23" height="15"/>
+                                        <rect key="frame" x="17" y="0.0" width="214" height="15"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                         <color key="textColor" systemColor="secondaryLabelColor" red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -166,7 +166,6 @@
                                     <constraint firstAttribute="bottom" secondItem="3TV-Se-vRa" secondAttribute="bottom" id="NwX-n6-36N"/>
                                     <constraint firstItem="3TV-Se-vRa" firstAttribute="leading" secondItem="EKH-Zo-IuI" secondAttribute="leading" id="WpS-aI-dIa"/>
                                     <constraint firstItem="a5i-6C-MMs" firstAttribute="top" secondItem="EKH-Zo-IuI" secondAttribute="top" id="iH4-pz-QE8"/>
-                                    <constraint firstAttribute="width" constant="40" id="sut-Rg-Col"/>
                                 </constraints>
                             </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="6I9-Cr-HzH">
@@ -196,6 +195,7 @@
                             <constraint firstItem="Fak-DS-0Ie" firstAttribute="leading" secondItem="fhs-L9-E4V" secondAttribute="leading" constant="20" id="EOd-Rj-jwF"/>
                             <constraint firstItem="fhs-L9-E4V" firstAttribute="trailing" secondItem="Fak-DS-0Ie" secondAttribute="trailing" constant="20" id="FcF-ez-Rqt"/>
                             <constraint firstItem="pkx-dt-z3n" firstAttribute="leading" secondItem="ogE-Vo-Gkv" secondAttribute="trailing" constant="15" id="GO9-Qe-1Hf"/>
+                            <constraint firstItem="fhs-L9-E4V" firstAttribute="trailing" secondItem="EKH-Zo-IuI" secondAttribute="trailing" constant="20" id="LdZ-g9-Chj"/>
                             <constraint firstItem="ogE-Vo-Gkv" firstAttribute="leading" secondItem="fhs-L9-E4V" secondAttribute="leading" constant="20" id="ShD-Xy-1v3"/>
                             <constraint firstItem="fhs-L9-E4V" firstAttribute="trailing" secondItem="pkx-dt-z3n" secondAttribute="trailing" constant="20" id="TTJ-yp-jo0"/>
                             <constraint firstItem="6I9-Cr-HzH" firstAttribute="top" secondItem="Fak-DS-0Ie" secondAttribute="bottom" constant="5" id="bvg-af-1Ob"/>
@@ -206,7 +206,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="fhs-L9-E4V"/>
                     </view>
-                    <navigationItem key="navigationItem" id="fhA-9A-qpN"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="fhA-9A-qpN"/>
                     <connections>
                         <outlet property="movieCoverImageView" destination="ogE-Vo-Gkv" id="qCH-cH-xrs"/>
                         <outlet property="movieOverviewTextView" destination="6I9-Cr-HzH" id="UvO-UU-jX9"/>
@@ -227,6 +227,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="f56-V5-USE">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" systemColor="systemPinkColor" red="1" green="0.1764705882" blue="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
