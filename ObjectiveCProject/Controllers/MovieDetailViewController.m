@@ -35,7 +35,7 @@
     self.movieRatingLabel.text = movie.rating.stringValue;
     
     /// Layout
-    self.movieCoverImageView.layer.cornerRadius = 8;
+    self.movieCoverImageView.layer.cornerRadius = 16;
     
     /// Loads cover
     NSMutableString *baseImageUrl = [NSMutableString stringWithString:@"https://image.tmdb.org/t/p/w185"];
