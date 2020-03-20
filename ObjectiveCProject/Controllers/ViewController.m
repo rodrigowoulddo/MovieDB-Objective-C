@@ -18,6 +18,8 @@
 @property (strong, nonatomic) NSMutableArray<Movie *> *popularMovies;
 @property (strong, nonatomic) NSMutableArray<Movie *> *nowPlayingMovies;
 @property (strong, nonatomic) Movie *selectedMovie;
+@property (strong, nonatomic) NSMutableArray *searchedMovies;
+@property  BOOL isFiltered;
 @property int page;
 
 @end
@@ -34,10 +36,14 @@
     [self loadMovies];
     
     self.title = @"Movies";
+    self.isFiltered = false;
+    self.searchBar.delegate = self;
+    self.searchBar.searchTextField.delegate = self;
     self.navigationController.navigationBar.prefersLargeTitles = YES;
 }
 
 
+// MARK: - Methods
 -(void) loadMovies {
     
     dispatch_group_t group = dispatch_group_create();
@@ -66,8 +72,20 @@
     
 }
 
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+    
+    if (searchText.length == 0) { /// In case ther is no text
+        self.isFiltered = false;
+        return;
+    }
+    else {
+        self.isFiltered = true;
+        NSLog(@"Should filter for sentence: %@", searchText);
+    }
+    
+}
 
-
+// MARK: - Table View Methods
 -(BOOL) isLastIndex: (long) index {
     return (index == self.popularMovies.count - 1);
 }
@@ -150,11 +168,19 @@
 }
 
 
+// MARK: - Prepare for Segue
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     MovieDetailViewController *movieDetailVC = [segue destinationViewController];
     
     movieDetailVC.movie = self.selectedMovie;
+}
+
+
+// MARK: - Text Field Delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
 }
 
 @end

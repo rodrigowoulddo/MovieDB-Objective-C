@@ -38,6 +38,7 @@
     
     self.movieCoverImageView.image = nil;/// Clears current cover
     
+    /// Cancels current cover loading
     /*
      If there is a image request in course,
      it is canceled. This way, images wont "blink",
