@@ -15,9 +15,9 @@
 
 @interface MovieDBRequest: NSObject
 
-+ (void)getPopularMoviesWithPage:(int)page andHandler:(void (^)(NSMutableArray *))handler;
-+ (void)getNowPlayingMoviesWithPage:(int)page andHandler:(void (^)(NSMutableArray *))handler;
-
++ (void) getPopularMoviesWithHandler:(void (^)(NSMutableArray *))handler;
++ (void) getNowPlayingMoviesWithHandler:(void (^)(NSMutableArray *))handler;
 + (NSURLSessionTask *) getMovieImageDataFromURL:(NSString *)url andHandler:(void(^)(NSData *))handler;
++ (NSURLSessionTask *) searchMoviesWithQuery:(NSString *)query andHandler:(void (^)(NSMutableArray *))handler;
 
 @end

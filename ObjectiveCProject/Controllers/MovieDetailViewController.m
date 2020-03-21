@@ -37,12 +37,18 @@
     /// Layout
     self.movieCoverImageView.layer.cornerRadius = 16;
     
-    /// Loads cover
+    /// Loads movie cover
+    NSLog(@"Will load cover for: %@", movie.title);
+    
+    if (movie.imageUrl == (NSString *)[NSNull null]) {
+        NSLog(@"No cover image available");
+        return;
+    }
+    
     NSMutableString *baseImageUrl = [NSMutableString stringWithString:@"https://image.tmdb.org/t/p/w185"];
     NSString *imageURL = [baseImageUrl stringByAppendingString:movie.imageUrl];
     
     NSLog(@"Will load image from url: %@", imageURL);
-
     
     dispatch_async(dispatch_get_global_queue(0,0), ^{
         

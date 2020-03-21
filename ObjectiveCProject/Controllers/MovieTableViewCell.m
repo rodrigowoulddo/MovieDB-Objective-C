@@ -49,6 +49,11 @@
     
     /// Loads movie cover
     NSLog(@"Will load cover for: %@", movie.title);
+    
+    if (movie.imageUrl == (NSString *)[NSNull null]) {
+        NSLog(@"No cover image available");
+        return;
+    }
 
     NSMutableString *baseImageUrl = [NSMutableString stringWithString:@"https://image.tmdb.org/t/p/w185"];
     NSString *imageURL = [baseImageUrl stringByAppendingString:movie.imageUrl];

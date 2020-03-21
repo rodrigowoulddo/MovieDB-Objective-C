@@ -19,17 +19,19 @@
 
 NSString *popularMoviesBaseUrl = @"https://api.themoviedb.org/3/movie/popular?api_key=2e8128cacbf1cbae9230177e3e5bc171";
 NSString *nowPlayingMoviesBaseUrl = @"https://api.themoviedb.org/3/movie/now_playing?api_key=2e8128cacbf1cbae9230177e3e5bc171";
+NSString *searchUrl = @"https://api.themoviedb.org/3/search/movie?api_key=2e8128cacbf1cbae9230177e3e5bc171";
 
-+(NSString *)requestUrl: (NSString *)url page:(int) page {
-    return [NSString stringWithFormat:@"%@&page=%d", url, page];
+
++(NSString *) searchURLWithQuery: (NSString *)query {
+    return [NSString stringWithFormat:@"%@&query=%@", searchUrl, query];
 }
 
 
-+ (void)getPopularMoviesWithPage:(int)page andHandler:(void (^)(NSMutableArray *))handler {
++ (void) getPopularMoviesWithHandler:(void (^)(NSMutableArray *))handler {
     
-    NSLog(@"Searching for popular movies (page %d)", page);
+    NSLog(@"Searching for popular movies");
     
-    NSURL *url = [NSURL URLWithString: [self requestUrl:popularMoviesBaseUrl page:page]];
+    NSURL *url = [NSURL URLWithString: popularMoviesBaseUrl];
     
     NSLog(@"Sending request: %@", url);
     
@@ -73,11 +75,11 @@ NSString *nowPlayingMoviesBaseUrl = @"https://api.themoviedb.org/3/movie/now_pla
     
 }
 
-+ (void)getNowPlayingMoviesWithPage:(int)page andHandler:(void (^)(NSMutableArray *))handler {
++ (void) getNowPlayingMoviesWithHandler:(void (^)(NSMutableArray *))handler {
     
-    NSLog(@"Searching for popular movies (page %d)", page);
+    NSLog(@"Searching for popular movies");
     
-    NSURL *url = [NSURL URLWithString: [self requestUrl:nowPlayingMoviesBaseUrl page:page]];
+    NSURL *url = [NSURL URLWithString: nowPlayingMoviesBaseUrl];
     
     NSLog(@"Sending request: %@", url);
     
@@ -121,7 +123,7 @@ NSString *nowPlayingMoviesBaseUrl = @"https://api.themoviedb.org/3/movie/now_pla
     
 }
 
-+ (NSURLSessionTask *)getMovieImageDataFromURL:(NSString *)movieImageurl andHandler:(void (^)(NSData *))handler {
++ (NSURLSessionTask *) getMovieImageDataFromURL:(NSString *)movieImageurl andHandler:(void (^)(NSData *))handler {
     
         NSURL *url = [NSURL URLWithString:movieImageurl];
 
@@ -139,6 +141,63 @@ NSString *nowPlayingMoviesBaseUrl = @"https://api.themoviedb.org/3/movie/now_pla
     
     [session resume]; /// Sends the request
     return session;
+}
+
++ (NSURLSessionTask *) searchMoviesWithQuery:(NSString *)query andHandler:(void (^)(NSMutableArray *))handler {
+    
+    NSLog(@"Searching for movies with query: %@", query);
+    
+    /// Encode query
+    NSString *charactersToEscape = @"!*'();:@&=+$,/?%#[] ";
+    NSCharacterSet *allowedCharacters = [[NSCharacterSet characterSetWithCharactersInString:charactersToEscape] invertedSet];
+    NSString *encodedQuery = [query stringByAddingPercentEncodingWithAllowedCharacters:allowedCharacters];
+    
+    NSURL *url = [NSURL URLWithString: [self searchURLWithQuery:encodedQuery]];
+    
+    NSLog(@"Sending request: %@", url);
+    
+    
+    NSURLSessionTask *task = [NSURLSession.sharedSession dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
+        
+        NSLog(@"Did receive API data.");
+        
+        /// Uncomment these lines to se
+        /// the returned movies list printed
+        /// on console
+        
+        /*
+        NSString *jsonResponse = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"Response: %@", jsonResponse);
+        */
+        
+        NSError *err;
+        NSDictionary *resultJSON = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&err];
+        
+        if (err) {
+            NSLog(@"Failed to serialize data into JSON: %@", err);
+            handler(NSMutableArray.new);
+            return;
+        }
+        
+        NSArray *moviesDictionaryArray = resultJSON[@"results"];
+        NSLog(@"Did serialize data into JSON.");
+        
+        NSMutableArray *movies = NSMutableArray.new;
+        for (NSDictionary *movieDictionary in moviesDictionaryArray) {
+            Movie *movie = Movie.new;
+            movie = [movie initWithDictionary:movieDictionary];
+            
+            [movies addObject:movie];
+        }
+        
+        NSLog(@"Did fetch json into movies array.");
+        handler(movies);
+        
+        
+    }];
+    
+    [task resume];
+    return task;
 }
 
 @end

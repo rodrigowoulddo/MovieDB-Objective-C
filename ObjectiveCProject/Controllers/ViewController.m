@@ -17,10 +17,12 @@
 //MARK: - Variables
 @property (strong, nonatomic) NSMutableArray<Movie *> *popularMovies;
 @property (strong, nonatomic) NSMutableArray<Movie *> *nowPlayingMovies;
+@property (strong, nonatomic) NSMutableArray<Movie *> *searchedMovies;
+
+@property (strong, nonatomic) NSURLSessionTask *currentSearchTask;
+
 @property (strong, nonatomic) Movie *selectedMovie;
-@property (strong, nonatomic) NSMutableArray *searchedMovies;
-@property  BOOL isFiltered;
-@property int page;
+
 
 @end
 
@@ -32,11 +34,11 @@
     
     self.popularMovies = NSMutableArray.new;
     self.nowPlayingMovies = NSMutableArray.new;
-    self.page = 1; // multiple paging may be implemented it the future
+    self.searchedMovies = NSMutableArray.new;
+    
     [self loadMovies];
     
     self.title = @"Movies";
-    self.isFiltered = false;
     self.searchBar.delegate = self;
     self.searchBar.searchTextField.delegate = self;
     self.navigationController.navigationBar.prefersLargeTitles = YES;
@@ -49,7 +51,7 @@
     dispatch_group_t group = dispatch_group_create();
     
     dispatch_group_enter(group);
-    [MovieDBRequest getPopularMoviesWithPage:self.page andHandler:^(NSMutableArray *movies) {
+    [MovieDBRequest getPopularMoviesWithHandler:^(NSMutableArray *movies) {
         
         [self.popularMovies addObjectsFromArray:movies];
         dispatch_group_leave(group);
@@ -57,7 +59,7 @@
     }];
     
     dispatch_group_enter(group);
-    [MovieDBRequest getNowPlayingMoviesWithPage:self.page andHandler:^(NSMutableArray *movies) {
+    [MovieDBRequest getNowPlayingMoviesWithHandler:^(NSMutableArray *movies) {
         
         [self.nowPlayingMovies addObjectsFromArray:movies];
         dispatch_group_leave(group);
@@ -72,16 +74,23 @@
     
 }
 
-- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
+-(void) searchForMoviesWithQuery: (NSString *) query {
     
-    if (searchText.length == 0) { /// In case ther is no text
-        self.isFiltered = false;
-        return;
-    }
-    else {
-        self.isFiltered = true;
-        NSLog(@"Should filter for sentence: %@", searchText);
-    }
+    /*
+     In case there is a search in progress,
+     it is cancelled, in order to save data
+     download and parsing.
+     */
+    [self.currentSearchTask cancel];
+    
+    self.currentSearchTask = [MovieDBRequest searchMoviesWithQuery:query andHandler:^(NSMutableArray *movies) {
+        
+        [self.searchedMovies addObjectsFromArray:movies];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+        });
+    }];
     
 }
 
@@ -91,10 +100,17 @@
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    
+    if (self.searchedMovies.count > 0 )
+        return 1;
+    else
+        return 2;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+    if (self.searchedMovies.count > 0 )
+        return self.searchedMovies.count;
     
     switch (section) {
         case 0: return self.popularMovies.count;
@@ -109,6 +125,10 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
+    if (self.searchedMovies.count > 0 )
+        return @"Results";
+    
     switch (section) {
         case 0: return @"Popular";
         case 1: return @"Now Playing";
@@ -120,21 +140,6 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     
-    
-    /*
-     
-     // On standby
-     
-     if ([self isLastIndex:indexPath.row]) {
-     [self loadMovies];
-     }
-     
-     */
-    
-    if (indexPath.section != 1) {
-        NSLog(@"Different than 1");
-    }
-    
     MovieTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier: [MovieTableViewCell identifier] forIndexPath:indexPath];
     
     NSMutableArray *movieArray;
@@ -144,6 +149,9 @@
         case 1: movieArray = self.nowPlayingMovies;
     }
     
+    if (self.searchedMovies.count > 0 )
+        movieArray = self.searchedMovies;
+
     Movie *movie = movieArray[indexPath.row];
     
     [cell configureWithMovie:movie];
@@ -160,6 +168,9 @@
         case 0: movieArray = self.popularMovies;
         case 1: movieArray = self.nowPlayingMovies;
     }
+    
+    if (self.searchedMovies.count > 0 )
+        movieArray = self.searchedMovies;
     
     Movie *selectedMovie = movieArray[indexPath.row];
     self.selectedMovie = selectedMovie;
@@ -178,9 +189,28 @@
 
 
 // MARK: - Text Field Delegate
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    
+    if (textField.text == 0) return;
+    
+    [self searchForMoviesWithQuery:textField.text];
+
+}
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+   
     [textField resignFirstResponder];
     return YES;
 }
+
+- (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
+    
+    [searchBar.searchTextField resignFirstResponder];
+    self.searchedMovies = NSMutableArray.new;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });}
 
 @end
