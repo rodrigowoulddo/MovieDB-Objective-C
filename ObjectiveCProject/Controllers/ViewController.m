@@ -34,28 +34,36 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"Movies";
+    self.navigationController.navigationBar.prefersLargeTitles = YES;
+    
     [self setupSearchBar];
     
     [self loadMovies];
-    
-    self.title = @"Movies";
-    self.searchBarController.searchBar.delegate = self;
-    self.searchBarController.searchBar.searchTextField.delegate = self;
-    self.navigationController.navigationBar.prefersLargeTitles = YES;
 }
 
 
 // MARK: - Methods
 -(void) setupSearchBar {
     
+    /// Creates searchbar
     self.searchBarController = UISearchController.new;
+    
+    /// Sets searchbar appearence and behaiviour
     [self.searchBarController.searchBar sizeToFit];
     self.searchBarController.obscuresBackgroundDuringPresentation = false;
     self.searchBarController.hidesNavigationBarDuringPresentation = true;
-    self.definesPresentationContext = true;
-    self.navigationItem.searchController = self.searchBarController;
     self.searchBarController.searchBar.searchTextField.clearButtonMode = UITextFieldViewModeNever;
     self.searchBarController.searchBar.returnKeyType = UIReturnKeyDone;
+    
+    /// Sets searchbar delegates
+    self.searchBarController.searchBar.delegate = self;
+    self.searchBarController.searchBar.searchTextField.delegate = self;
+    
+    
+    /// Adds searchbar to navigation
+    self.navigationItem.searchController = self.searchBarController;
+
 }
 
 -(void) loadMovies {
@@ -130,9 +138,6 @@
     return;
 }
 
-// MARK: - Action Outlets
-
-
 // MARK: - Table View Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -145,32 +150,42 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (self.showldDisplaySearch)
+    if (self.showldDisplaySearch) {
+        
         return self.searchedMovies.count;
-    
-    switch (section) {
-        case 0: return self.popularMovies.count;
-        case 1: return self.nowPlayingMovies.count;
+
+    } else {
+        
+        switch (section) {
+            case 0: return self.popularMovies.count;
+            case 1: return self.nowPlayingMovies.count;
+        }
+        
+        return 0;
     }
-    
-    return 0;
 }
+
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 148;
 }
 
+
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    if (self.showldDisplaySearch)
+    if (self.showldDisplaySearch) {
+        
         return @"Results";
-    
-    switch (section) {
-        case 0: return @"Popular";
-        case 1: return @"Now Playing";
+
+    } else {
+        
+        switch (section) {
+            case 0: return @"Popular";
+            case 1: return @"Now Playing";
+        }
+        
+        return @"";
     }
-    
-    return @"";
 }
 
 
@@ -180,13 +195,17 @@
     
     NSMutableArray *movieArray;
     
-    switch (indexPath.section) {
-        case 0: movieArray = self.popularMovies;
-        case 1: movieArray = self.nowPlayingMovies;
-    }
-    
-    if (self.showldDisplaySearch)
+    if (self.showldDisplaySearch) {
+        
         movieArray = self.searchedMovies;
+        
+    } else {
+        
+        switch (indexPath.section) {
+            case 0: movieArray = self.popularMovies;
+            case 1: movieArray = self.nowPlayingMovies;
+        }
+    }
 
     Movie *movie = movieArray[indexPath.row];
     
@@ -200,13 +219,17 @@
     
     NSMutableArray *movieArray;
     
-    switch (indexPath.section) {
-        case 0: movieArray = self.popularMovies;
-        case 1: movieArray = self.nowPlayingMovies;
-    }
-    
-    if (self.showldDisplaySearch)
+    if (self.showldDisplaySearch) {
+        
         movieArray = self.searchedMovies;
+        
+    } else {
+        
+        switch (indexPath.section) {
+            case 0: movieArray = self.popularMovies;
+            case 1: movieArray = self.nowPlayingMovies;
+        }
+    }
     
     Movie *selectedMovie = movieArray[indexPath.row];
     self.selectedMovie = selectedMovie;
@@ -220,7 +243,6 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     MovieDetailViewController *movieDetailVC = [segue destinationViewController];
-    
     movieDetailVC.movie = self.selectedMovie;
 }
 
