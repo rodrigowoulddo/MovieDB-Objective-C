@@ -117,10 +117,14 @@
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PGb-ft-8Mg" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-                <searchBar contentMode="redraw" id="qh2-6e-B4c">
-                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
+                <searchBar contentMode="redraw" searchBarStyle="prominent" text="" placeholder="Search" id="qh2-6e-B4c">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                    <textInputTraits key="textInputTraits"/>
+                    <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                    <scopeButtonTitles>
+                        <string>Title</string>
+                        <string>Title</string>
+                    </scopeButtonTitles>
                 </searchBar>
             </objects>
             <point key="canvasLocation" x="1526.0869565217392" y="213.61607142857142"/>

@@ -18,11 +18,9 @@
 @property (strong, nonatomic) NSMutableArray<Movie *> *popularMovies;
 @property (strong, nonatomic) NSMutableArray<Movie *> *nowPlayingMovies;
 @property (strong, nonatomic) NSMutableArray<Movie *> *searchedMovies;
-
-@property (strong, nonatomic) NSURLSessionTask *currentSearchTask;
-
 @property (strong, nonatomic) Movie *selectedMovie;
 
+@property (strong, nonatomic) NSURLSessionTask *currentSearchTask;
 
 @end
 
@@ -32,9 +30,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.popularMovies = NSMutableArray.new;
-    self.nowPlayingMovies = NSMutableArray.new;
-    self.searchedMovies = NSMutableArray.new;
+    [self setupSearchBar];
     
     [self loadMovies];
     
@@ -46,8 +42,15 @@
 
 
 // MARK: - Methods
+-(void) setupSearchBar {
+    self.searchBar.searchTextField.clearButtonMode = UITextFieldViewModeNever;
+}
+
 -(void) loadMovies {
     
+    self.popularMovies = NSMutableArray.new;
+    self.nowPlayingMovies = NSMutableArray.new;
+        
     dispatch_group_t group = dispatch_group_create();
     
     dispatch_group_enter(group);
@@ -68,6 +71,7 @@
     
     dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
     dispatch_async(dispatch_get_main_queue(), ^{
+        
         [self.tableView reloadData];
     });
     
@@ -75,29 +79,48 @@
 }
 
 -(void) searchForMoviesWithQuery: (NSString *) query {
-    
+        
     /*
      In case there is a search in progress,
      it is cancelled, in order to save data
      download and parsing.
      */
+    
     [self.currentSearchTask cancel];
+    
+    self.searchedMovies = NSMutableArray.new;
+    
+    [self.searchBar setShowsCancelButton: YES animated: YES];
     
     self.currentSearchTask = [MovieDBRequest searchMoviesWithQuery:query andHandler:^(NSMutableArray *movies) {
         
         [self.searchedMovies addObjectsFromArray:movies];
         
         dispatch_async(dispatch_get_main_queue(), ^{
+            
             [self.tableView reloadData];
         });
+        
     }];
-    
 }
 
-// MARK: - Table View Methods
--(BOOL) isLastIndex: (long) index {
-    return (index == self.popularMovies.count - 1);
+- (void)cancelSearch {
+    
+    [self.searchBar setShowsCancelButton:NO animated:YES];
+    
+    self.searchedMovies = NSMutableArray.new;
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.tableView reloadData];
+    });
+    
+    return;
 }
+
+// MARK: - Action Outlets
+
+
+// MARK: - Table View Methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
@@ -180,6 +203,7 @@
 
 
 // MARK: - Prepare for Segue
+
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     MovieDetailViewController *movieDetailVC = [segue destinationViewController];
@@ -190,27 +214,31 @@
 
 // MARK: - Text Field Delegate
 
-- (void)textFieldDidEndEditing:(UITextField *)textField {
-    
-    if (textField.text == 0) return;
-    
-    [self searchForMoviesWithQuery:textField.text];
-
-}
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
    
     [textField resignFirstResponder];
     return YES;
 }
 
+
+// MARK: - Search Bar Delegate
+
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     
-    [searchBar.searchTextField resignFirstResponder];
-    self.searchedMovies = NSMutableArray.new;
+    self.searchBar.text = @"";
+    [self cancelSearch];
+    [searchBar resignFirstResponder];
+}
+
+
+- (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
     
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.tableView reloadData];
-    });}
+    if (searchText.length == 0) {
+        [self cancelSearch];
+        return;
+    }
+    
+    [self searchForMoviesWithQuery:searchText];
+}
 
 @end

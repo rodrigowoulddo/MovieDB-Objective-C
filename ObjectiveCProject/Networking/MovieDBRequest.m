@@ -159,6 +159,8 @@ NSString *searchUrl = @"https://api.themoviedb.org/3/search/movie?api_key=2e8128
     
     NSURLSessionTask *task = [NSURLSession.sharedSession dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
         
+        if (data == nil) return;
+        
         NSLog(@"Did receive API data.");
         
         /// Uncomment these lines to se
