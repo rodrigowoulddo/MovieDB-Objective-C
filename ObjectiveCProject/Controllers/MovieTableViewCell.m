@@ -55,7 +55,7 @@
         return;
     }
 
-    NSMutableString *baseImageUrl = [NSMutableString stringWithString:@"https://image.tmdb.org/t/p/w185"];
+    NSMutableString *baseImageUrl = [NSMutableString stringWithString:@"https://image.tmdb.org/t/p/w92"];
     NSString *imageURL = [baseImageUrl stringByAppendingString:movie.imageUrl];
     
     NSLog(@"Loading cover from: %@", imageURL);
