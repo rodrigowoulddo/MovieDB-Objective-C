@@ -11,7 +11,5 @@
 @interface ViewController : UITableViewController
 <UISearchBarDelegate, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
 
-@property (strong, nonatomic) IBOutlet UISearchBar *searchBar;
-
 @end
 

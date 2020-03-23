@@ -20,6 +20,8 @@
 @property (strong, nonatomic) NSMutableArray<Movie *> *searchedMovies;
 @property (strong, nonatomic) Movie *selectedMovie;
 
+@property (strong, nonatomic) UISearchController *searchBarController;
+
 @property (nonatomic) BOOL showldDisplaySearch;
 
 @property (strong, nonatomic) NSURLSessionTask *currentSearchTask;
@@ -37,15 +39,23 @@
     [self loadMovies];
     
     self.title = @"Movies";
-    self.searchBar.delegate = self;
-    self.searchBar.searchTextField.delegate = self;
+    self.searchBarController.searchBar.delegate = self;
+    self.searchBarController.searchBar.searchTextField.delegate = self;
     self.navigationController.navigationBar.prefersLargeTitles = YES;
 }
 
 
 // MARK: - Methods
 -(void) setupSearchBar {
-    self.searchBar.searchTextField.clearButtonMode = UITextFieldViewModeNever;
+    
+    self.searchBarController = UISearchController.new;
+    [self.searchBarController.searchBar sizeToFit];
+    self.searchBarController.obscuresBackgroundDuringPresentation = false;
+    self.searchBarController.hidesNavigationBarDuringPresentation = true;
+    self.definesPresentationContext = true;
+    self.navigationItem.searchController = self.searchBarController;
+    self.searchBarController.searchBar.searchTextField.clearButtonMode = UITextFieldViewModeNever;
+    self.searchBarController.searchBar.returnKeyType = UIReturnKeyDone;
 }
 
 -(void) loadMovies {
@@ -92,7 +102,7 @@
     
     self.searchedMovies = NSMutableArray.new;
     
-    [self.searchBar setShowsCancelButton: YES animated: YES];
+    [self.searchBarController.searchBar setShowsCancelButton: YES animated: YES];
     
     self.currentSearchTask = [MovieDBRequest searchMoviesWithQuery:query andHandler:^(NSMutableArray *movies) {
         
@@ -109,8 +119,7 @@
 
 - (void)cancelSearch {
     
-    [self.searchBar setShowsCancelButton:NO animated:YES];
-    
+    [self.currentSearchTask cancel];
     self.searchedMovies = NSMutableArray.new;
     
     dispatch_async(dispatch_get_main_queue(), ^{
@@ -227,9 +236,14 @@
 
 // MARK: - Search Bar Delegate
 
+- (void)searchBarTextDidBeginEditing:(UISearchBar *)searchBar {
+    [self.searchBarController.searchBar setShowsCancelButton: YES animated: YES];
+}
+
 - (void)searchBarCancelButtonClicked:(UISearchBar *)searchBar {
     
-    self.searchBar.text = @"";
+    [self.searchBarController.searchBar setShowsCancelButton:NO animated:YES];
+    self.searchBarController.searchBar.text = @"";
     [self cancelSearch];
     [searchBar resignFirstResponder];
 }

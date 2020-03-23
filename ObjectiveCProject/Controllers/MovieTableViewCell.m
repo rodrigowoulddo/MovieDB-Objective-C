@@ -39,9 +39,7 @@
     self.movieRatingLabel.text = roundedRatingString;
     
     self.movieCoverImageView.layer.cornerRadius = 8;
-    
-    self.movieCoverImageView.image = nil;/// Clears current cover
-    
+        
     /// Cancels current cover loading
     /*
      If there is a image request in course,
@@ -56,6 +54,7 @@
     
     if (movie.imageUrl == (NSString *)[NSNull null]) {
         NSLog(@"No cover image available");
+        self.movieCoverImageView.image = nil;
         return;
     }
 
@@ -66,6 +65,7 @@
     self.coverSessionTask = [MovieDBRequest getMovieImageDataFromURL:imageURL andHandler:^(NSData *data)  {
 
         if ( data == nil ) {
+            self.movieCoverImageView.image = nil;
             return;
         }
         
@@ -76,6 +76,7 @@
             
             if (image == nil) {
                 NSLog(@"Error converting data response to image");
+                self.movieCoverImageView.image = nil;
                 return;
             }
             
