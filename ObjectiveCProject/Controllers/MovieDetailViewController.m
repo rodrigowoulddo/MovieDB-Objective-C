@@ -32,7 +32,11 @@
     /// Sets texts
     self.movieTitleLabel.text = movie.title;
     self.movieOverviewTextView.text = movie.overview;
-    self.movieRatingLabel.text = movie.rating.stringValue;
+    
+    /// Sets rating
+    float roundedRating = roundf(10 * movie.rating.floatValue) / 10;
+    NSString *roundedRatingString = [NSString stringWithFormat:@"%.01f",roundedRating ];
+    self.movieRatingLabel.text = roundedRatingString;
     
     /// Layout
     self.movieCoverImageView.layer.cornerRadius = 16;

@@ -20,6 +20,8 @@
 @property (strong, nonatomic) NSMutableArray<Movie *> *searchedMovies;
 @property (strong, nonatomic) Movie *selectedMovie;
 
+@property (nonatomic) BOOL showldDisplaySearch;
+
 @property (strong, nonatomic) NSURLSessionTask *currentSearchTask;
 
 @end
@@ -71,7 +73,7 @@
     
     dispatch_group_wait(group, DISPATCH_TIME_FOREVER);
     dispatch_async(dispatch_get_main_queue(), ^{
-        
+        self.showldDisplaySearch = NO;
         [self.tableView reloadData];
     });
     
@@ -98,6 +100,7 @@
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
+            self.showldDisplaySearch = YES;
             [self.tableView reloadData];
         });
         
@@ -111,6 +114,7 @@
     self.searchedMovies = NSMutableArray.new;
     
     dispatch_async(dispatch_get_main_queue(), ^{
+        self.showldDisplaySearch = NO;
         [self.tableView reloadData];
     });
     
@@ -124,7 +128,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     
-    if (self.searchedMovies.count > 0 )
+    if (self.showldDisplaySearch)
         return 1;
     else
         return 2;
@@ -132,7 +136,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     
-    if (self.searchedMovies.count > 0 )
+    if (self.showldDisplaySearch)
         return self.searchedMovies.count;
     
     switch (section) {
@@ -149,7 +153,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     
-    if (self.searchedMovies.count > 0 )
+    if (self.showldDisplaySearch)
         return @"Results";
     
     switch (section) {
@@ -172,7 +176,7 @@
         case 1: movieArray = self.nowPlayingMovies;
     }
     
-    if (self.searchedMovies.count > 0 )
+    if (self.showldDisplaySearch)
         movieArray = self.searchedMovies;
 
     Movie *movie = movieArray[indexPath.row];
@@ -192,7 +196,7 @@
         case 1: movieArray = self.nowPlayingMovies;
     }
     
-    if (self.searchedMovies.count > 0 )
+    if (self.showldDisplaySearch)
         movieArray = self.searchedMovies;
     
     Movie *selectedMovie = movieArray[indexPath.row];

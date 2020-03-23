@@ -32,7 +32,11 @@
     /// Sets texts
     self.movieTitleLabel.text = movie.title;
     self.movieOverviewLabel.text = movie.overview;
-    self.movieRatingLabel.text = movie.rating.stringValue;
+    
+    /// Sets rating
+    float roundedRating = roundf(10 * movie.rating.floatValue) / 10;
+    NSString *roundedRatingString = [NSString stringWithFormat:@"%.01f",roundedRating ];
+    self.movieRatingLabel.text = roundedRatingString;
     
     self.movieCoverImageView.layer.cornerRadius = 8;
     
@@ -55,7 +59,7 @@
         return;
     }
 
-    NSMutableString *baseImageUrl = [NSMutableString stringWithString:@"https://image.tmdb.org/t/p/w92"];
+    NSMutableString *baseImageUrl = [NSMutableString stringWithString:@"https://image.tmdb.org/t/p/w154"];
     NSString *imageURL = [baseImageUrl stringByAppendingString:movie.imageUrl];
     
     NSLog(@"Loading cover from: %@", imageURL);

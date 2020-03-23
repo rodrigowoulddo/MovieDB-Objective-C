@@ -15,12 +15,23 @@
 
 @end
 
+static NSCache *imageCache;
+
 @implementation MovieDBRequest
 
 NSString *popularMoviesBaseUrl = @"https://api.themoviedb.org/3/movie/popular?api_key=2e8128cacbf1cbae9230177e3e5bc171";
 NSString *nowPlayingMoviesBaseUrl = @"https://api.themoviedb.org/3/movie/now_playing?api_key=2e8128cacbf1cbae9230177e3e5bc171";
 NSString *searchUrl = @"https://api.themoviedb.org/3/search/movie?api_key=2e8128cacbf1cbae9230177e3e5bc171";
 
+
++ (NSCache *) imageCache {
+    
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        imageCache = NSCache.new;
+    });
+    return imageCache;
+}
 
 +(NSString *) searchURLWithQuery: (NSString *)query {
     return [NSString stringWithFormat:@"%@&query=%@", searchUrl, query];
@@ -123,7 +134,30 @@ NSString *searchUrl = @"https://api.themoviedb.org/3/search/movie?api_key=2e8128
     
 }
 
++ (NSData *) getCacheImageWithUrl: (NSString *) url {
+    
+    NSData *imageData = [[self imageCache] objectForKey:url];
+    
+    return imageData;
+}
+
++ (void) cacheImageData: (NSData *) data atUrl: (NSString *) url {
+    
+    [[self imageCache] setObject:data forKey:url];
+}
+
 + (NSURLSessionTask *) getMovieImageDataFromURL:(NSString *)movieImageurl andHandler:(void (^)(NSData *))handler {
+    
+    /// Checks cache for image data
+    NSData *cachedImageData = [self getCacheImageWithUrl:movieImageurl];
+    if ( cachedImageData != nil ) {
+        
+        NSLog(@"Did found image on cache.");
+        
+        handler(cachedImageData);
+        return nil;
+    }
+    
     
         NSURL *url = [NSURL URLWithString:movieImageurl];
 
@@ -134,7 +168,8 @@ NSString *searchUrl = @"https://api.themoviedb.org/3/search/movie?api_key=2e8128
                 handler(nil);
                 return;
             }
-
+            
+            [self cacheImageData:data atUrl:movieImageurl];
             handler(data);
             
         }];
