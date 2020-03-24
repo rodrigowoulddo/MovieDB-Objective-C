@@ -13,11 +13,17 @@
 
 #endif /* MovieDBRequest_h */
 
+typedef enum {
+    small,
+    medium,
+    large
+} ImageSize;
+
 @interface MovieDBRequest: NSObject
 
 + (void) getPopularMoviesWithHandler:(void (^)(NSMutableArray *))handler;
 + (void) getNowPlayingMoviesWithHandler:(void (^)(NSMutableArray *))handler;
-+ (NSURLSessionTask *) getMovieImageDataFromURL:(NSString *)url andHandler:(void(^)(NSData *))handler;
++ (NSURLSessionTask *) getMovieImageDataFromPath:(NSString *)movieImagePath andSize:(ImageSize) imageSize andHandler:(void (^)(NSData *))handler;
 + (NSURLSessionTask *) searchMoviesWithQuery:(NSString *)query andHandler:(void (^)(NSMutableArray *))handler;
 
 @end

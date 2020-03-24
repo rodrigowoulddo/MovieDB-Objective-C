@@ -8,6 +8,7 @@
 
 #import "MovieDetailViewController.h"
 #import "Movie.h"
+#import "MovieDBRequest.h"
 
 @interface MovieDetailViewController ()
 
@@ -49,24 +50,31 @@
         return;
     }
     
-    NSMutableString *baseImageUrl = [NSMutableString stringWithString:@"https://image.tmdb.org/t/p/w185"];
-    NSString *imageURL = [baseImageUrl stringByAppendingString:movie.imageUrl];
-    
-    NSLog(@"Will load image from url: %@", imageURL);
-    
-    dispatch_async(dispatch_get_global_queue(0,0), ^{
+    NSLog(@"Loading cover from: %@", movie.imageUrl);
+    [MovieDBRequest getMovieImageDataFromPath:movie.imageUrl  andSize:medium andHandler:^(NSData *data)  {
+
+        if ( data == nil ) {
+            NSLog(@"Image data response was NULL");
+            self.movieCoverImageView.image = nil;
+            return;
+        }
         
-        NSData * data = [[NSData alloc] initWithContentsOfURL: [NSURL URLWithString: imageURL]];
+        UIImage *image = [UIImage imageWithData:data];
         
-        if ( data == nil ) return;
+        if (image == nil) {
+            NSLog(@"Error converting data response to image");
+            self.movieCoverImageView.image = nil;
+            return;
+        }
         
         dispatch_async(dispatch_get_main_queue(), ^{
             
-            UIImage *image = [UIImage imageWithData:data];
             self.movieCoverImageView.image = image;
+            NSLog(@"Successfuly loaded image");
             
         });
-    });
+        
+    }];
     
 }
 

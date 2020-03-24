@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 #import "MovieDBRequest.h"
 
-
 @interface MovieDBRequest()
 
 
@@ -22,7 +21,7 @@ static NSCache *imageCache;
 NSString *popularMoviesBaseUrl = @"https://api.themoviedb.org/3/movie/popular?api_key=2e8128cacbf1cbae9230177e3e5bc171";
 NSString *nowPlayingMoviesBaseUrl = @"https://api.themoviedb.org/3/movie/now_playing?api_key=2e8128cacbf1cbae9230177e3e5bc171";
 NSString *searchUrl = @"https://api.themoviedb.org/3/search/movie?api_key=2e8128cacbf1cbae9230177e3e5bc171";
-
+NSString *baseImageURL = @"https://image.tmdb.org/t/p/";
 
 + (NSCache *) imageCache {
     
@@ -36,7 +35,6 @@ NSString *searchUrl = @"https://api.themoviedb.org/3/search/movie?api_key=2e8128
 +(NSString *) searchURLWithQuery: (NSString *)query {
     return [NSString stringWithFormat:@"%@&query=%@", searchUrl, query];
 }
-
 
 + (void) getPopularMoviesWithHandler:(void (^)(NSMutableArray *))handler {
     
@@ -146,10 +144,22 @@ NSString *searchUrl = @"https://api.themoviedb.org/3/search/movie?api_key=2e8128
     [[self imageCache] setObject:data forKey:url];
 }
 
-+ (NSURLSessionTask *) getMovieImageDataFromURL:(NSString *)movieImageurl andHandler:(void (^)(NSData *))handler {
++ (NSURLSessionTask *) getMovieImageDataFromPath:(NSString *)movieImagePath andSize:(ImageSize)size andHandler:(void (^)(NSData *))handler {
+    
+    
+    NSString *imagSizeUrl;
+    
+    switch (size) {
+        case small: imagSizeUrl = @"w154"; break;
+        case medium: imagSizeUrl = @"w342"; break;
+        case large: imagSizeUrl = @"original"; break;
+    }
+    
+    
+    NSString *imageFullPath = [baseImageURL stringByAppendingFormat: @"%@%@", imagSizeUrl, movieImagePath];
     
     /// Checks cache for image data
-    NSData *cachedImageData = [self getCacheImageWithUrl:movieImageurl];
+    NSData *cachedImageData = [self getCacheImageWithUrl:imageFullPath];
     if ( cachedImageData != nil ) {
         
         NSLog(@"Did found image on cache.");
@@ -159,7 +169,7 @@ NSString *searchUrl = @"https://api.themoviedb.org/3/search/movie?api_key=2e8128
     }
     
     
-        NSURL *url = [NSURL URLWithString:movieImageurl];
+        NSURL *url = [NSURL URLWithString:imageFullPath];
 
         NSURLSessionTask *session = [NSURLSession.sharedSession dataTaskWithURL:url completionHandler:^(NSData * _Nullable data, NSURLResponse * _Nullable response, NSError * _Nullable error) {
             
@@ -169,7 +179,7 @@ NSString *searchUrl = @"https://api.themoviedb.org/3/search/movie?api_key=2e8128
                 return;
             }
             
-            [self cacheImageData:data atUrl:movieImageurl];
+            [self cacheImageData:data atUrl:imageFullPath];
             handler(data);
             
         }];

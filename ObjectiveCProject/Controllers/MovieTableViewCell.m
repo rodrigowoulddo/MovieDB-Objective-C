@@ -58,27 +58,26 @@
         return;
     }
 
-    NSMutableString *baseImageUrl = [NSMutableString stringWithString:@"https://image.tmdb.org/t/p/w154"];
-    NSString *imageURL = [baseImageUrl stringByAppendingString:movie.imageUrl];
     
-    NSLog(@"Loading cover from: %@", imageURL);
-    self.coverSessionTask = [MovieDBRequest getMovieImageDataFromURL:imageURL andHandler:^(NSData *data)  {
+    NSLog(@"Loading cover from: %@", movie.imageUrl);
+    self.coverSessionTask = [MovieDBRequest getMovieImageDataFromPath:movie.imageUrl  andSize:small andHandler:^(NSData *data)  {
 
         if ( data == nil ) {
+            NSLog(@"Image data response was NULL");
+            self.movieCoverImageView.image = nil;
+            return;
+        }
+        
+        UIImage *image = [UIImage imageWithData:data];
+        
+        if (image == nil) {
+            NSLog(@"Error converting data response to image");
             self.movieCoverImageView.image = nil;
             return;
         }
         
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            
-            UIImage *image = [UIImage imageWithData:data];
-            
-            if (image == nil) {
-                NSLog(@"Error converting data response to image");
-                self.movieCoverImageView.image = nil;
-                return;
-            }
             
             self.movieCoverImageView.image = image;
             NSLog(@"Successfuly loaded image");
