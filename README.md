@@ -11,9 +11,9 @@ The app desn't use any POD's or third party code.
 
 ## Screenshots
 
-<img src="./Example%20Screenshots/Main.png" width="300" />
-<img src="./Example%20Screenshots/Detail.png" width="300" />
+<img src="./Example%20Screenshots/Main.png" width="300" /><img src="./Example%20Screenshots/Detail.png" width="300" />
 <img src="./Example%20Screenshots/Search.png" width="300" />
+
 
 
 
