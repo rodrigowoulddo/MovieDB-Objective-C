@@ -10,6 +10,6 @@ A simple Objective-C app that consumes MDB API using MVC architecture with separ
 The app desn't use any POD's or third party code.
 
 ##Screenshots
-![Main Page](master/Example Screenshots/Main.png)
+![Main Page](https://raw.githubusercontent.com/rodrigowoulddo/MovieDB-Objective-C/master/Example%20Screenshots/Main.png)
 
 
