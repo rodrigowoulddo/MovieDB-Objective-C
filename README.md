@@ -9,7 +9,7 @@ A simple Objective-C app that consumes MDB API using MVC architecture with separ
 
 The app desn't use any POD's or third party code.
 
-The Swift version of this app can be found [here](https://github.com/rodrigowoulddo/MovieDB-Swift)
+The Swift version of this app can be found [here](https://github.com/rodrigowoulddo/MovieDB-Swift).
 
 ## Screenshots
 
