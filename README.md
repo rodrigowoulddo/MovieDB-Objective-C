@@ -9,8 +9,11 @@ A simple Objective-C app that consumes MDB API using MVC architecture with separ
 
 The app desn't use any POD's or third party code.
 
-##Screenshots
-<img src="./Example%20Screenshots/Main.png" width="100" />
+## Screenshots
+
+<img src="./Example%20Screenshots/Main.png" width="300" />
+<img src="./Example%20Screenshots/Detail.png" width="300" />
+<img src="./Example%20Screenshots/Search.png" width="300" />
 
 
 
