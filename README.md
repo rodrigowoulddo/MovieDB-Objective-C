@@ -1,4 +1,5 @@
-# MovieDB App ![](https://img.shields.io/badge/iOS-13.0-brightgreen)
+# MovieDB App
+![](https://badgen.net/badge/iOS/13/blue) ![](https://badgen.net/badge/iOS/Objective-C/orange)
 
 * **Platform:** iOS (Objective-C)
 * **Aplication Language:** English
