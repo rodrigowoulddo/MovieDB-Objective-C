@@ -23,6 +23,7 @@ The Swift version of this app can be found [here](https://github.com/rodrigowoul
 * Multi-section TableView
 * Async API call
 * API response await with dispatch group
+* Image caching with NSCache
 * Assync image loading
 
 ## Licence
