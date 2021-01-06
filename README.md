@@ -28,4 +28,4 @@ The Swift version of this app can be found [here](https://github.com/rodrigowoul
 * Assync image loading
 
 ## Licence
-Use as you want. 😁
+Use as you please. 😁
